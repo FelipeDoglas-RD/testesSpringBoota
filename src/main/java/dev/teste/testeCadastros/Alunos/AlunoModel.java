@@ -1,18 +1,27 @@
-package dev.teste.testeCadastros;
+package dev.teste.testeCadastros.Alunos;
 
+import dev.teste.testeCadastros.Aulas.AulasModel;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 //Transforma classe em uma entidade do db
 @Entity
-@Table(name = "tb_cadastro")
+@Table(name = "tb_cadastro_teste")
 
-public class TesteModel {
+public class AlunoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-    String nome;
-    String email;
-    int idade;
+            
+    private long id;
+    private String nome;
+    private String email;
+    private int idade;
+
+    //Muitos para um
+    @ManyToOne
+    @JoinColumn(name = "missoes_id")//Foreing Key 
+    private AulasModel aulas;
 
     public String getNome() {
         return nome;
@@ -38,7 +47,7 @@ public class TesteModel {
         this.idade = idade;
     }
 
-    public TesteModel(String nome, String email, int idade) {
+    public AlunoModel(String nome, String email, int idade) {
         this.nome = nome;
         this.email = email;
         this.idade = idade;
